@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 const { User } = require("../models");
 
+
 module.exports.checkUser = async (req, res, next) => {
   try {
     const {
@@ -16,3 +17,5 @@ module.exports.checkUser = async (req, res, next) => {
     next(error);
   }
 };
+
+

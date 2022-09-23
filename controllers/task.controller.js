@@ -28,20 +28,37 @@ module.exports.getTasksByUser = async (req, res, next) => {
   }
 };
 
+// Updated Task
 
-// module.exports.updateTaskInstance = async (req, res, next) => {
-//   try {
-//     const {
-//       instanceUser,
-//     } = req;
-//    
-//     const updatedTask = await instanceUser.update(body);
-//     updatedUser.password = undefined;
-//     res.status(200).send({ data: updatedTask});
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+module.exports.updateTaskInstance = async (req, res, next) => {
+  try {
+    const {
+      instanceTask, body
+    } = req;
+   
+    const updatedTask = await instanceTask.update(body,{returning:true});
+    
+    res.status(200).send({ data: updatedTask});
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+//Deleted Task
+
+module.exports.deleteTaskById = async (req, res, next) => {
+  try {
+    const { instanceTask } = req;
+
+    await instanceTask.destroy();
+    res.status(200).send({ data: instanceTask });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports.getAllTasks= async (req, res, next) => {
   try {
